@@ -1,0 +1,45 @@
+# IDE files
+.project
+.idea/
+.settings/
+.vscode/
+.devcontainer
+.DS_Store
+*.code-workspace
+
+# Dependencies
+node_modules/
+lib/jalangi2*
+
+# Build files
+.ipynb_checkpoints*
+_build
+__pycache__
+src/**/*.js
+src/**/*.js.map
+*.stub
+*_jalangi_.js
+*_jalangi_.json
+tests/reduce/tests/*
+tests/unit/*.js
+tests/*_header.js*
+
+# Output
+taint*.png
+stats*.csv
+stats*.xlsx
+/taint*.pdf
+/taint*.json
+pipeline/taint*.pdf
+pipeline/taint*.json
+tmp.out
+output/
+packages/
+artifacts/
+
+# Pipeline
+crawl_logs
+state.json
+state.bak.json
+results.json
+index.txt

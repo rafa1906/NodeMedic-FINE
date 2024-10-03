@@ -17,7 +17,7 @@ Run the following command in the root of the project (in the same directory
 as the `Dockerfile`) to build the Docker container:
 
 ```bash
-$ docker build --platform=linux/amd64 -t nodemedic-FINE:latest .
+docker build --platform=linux/amd64 -t nodemedic-fine:latest .
 ```
 
 For reference, a fresh build takes around 3 minutes on a M1 Mac.
@@ -40,7 +40,7 @@ emulation.
 
 ## Minimal working example
 ```bash
-$ docker run --rm -it nodemedic-fine:latest --package=raspberry-vol --version=1.1.0 --mode=full
+docker run --rm -it nodemedic-fine:latest --package=raspberry-vol --version=1.1.0 --mode=full
 ```
 The `--package` argument allows you to specify the package name to analyze 
 The `--version` argument is the specific version of that package to analyze.
@@ -59,7 +59,7 @@ Assuming the terminal is currently on the root directory of this project, the
 following command will download and install `raspberry-vol@1.1.0` and its 
 dependencies in on the chosen directory outside docker:
 ```bash
-$ docker run -it --rm -v $PWD/packages/:/nodetaint/packageData:rw -v $PWD/artifacts/:/nodetaint/analysisArtifacts:rw nodemedic-fine:latest --package=raspberry-vol --version=1.1.0 --mode=gather
+docker run -it --rm -v $PWD/packages/:/nodetaint/packageData:rw -v $PWD/artifacts/:/nodetaint/analysisArtifacts:rw nodemedic-fine:latest --package=raspberry-vol --version=1.1.0 --mode=gather
 ```
 
 If you take a look at the `packages` directory you will see that 
@@ -69,7 +69,7 @@ also find a `results_gather.json` file with information about which entry points
 
 Still in the root directory, you can now tell NodeMedic-FINE to analyze the package:
 ```bash
-$ docker run -it --rm -v $PWD/packages/:/nodetaint/packageData:rw -v $PWD/artifacts/:/nodetaint/analysisArtifacts:rw nodemedic:latest --package=raspberry-vol --version=1.1.0 --mode=analysis`
+docker run -it --rm -v $PWD/packages/:/nodetaint/packageData:rw -v $PWD/artifacts/:/nodetaint/analysisArtifacts:rw nodemedic:latest --package=raspberry-vol --version=1.1.0 --mode=analysis`
 ```
 
 You should see a line in the output saying 
@@ -127,21 +127,21 @@ The package entry has the following form:
 
 ```json
 "id": package name,
-"index": index in the npm package repo,
+"index": index in the npm package repo (gathering only),
 "version": package version,
-"downloadCount": package download count,
-"packagePath": package to installed package,
+"downloadCount": package download count (gathering only),
+"packagePath": path to installed package,
 "hasMain": whether the package has a main script,
-"browserAPIs": list of browser apis found in the package
-"sinks": list of NodeMedic-FINE--supported sinks found in the package,
+"browserAPIs": list of browser APIs found in the package,
+"sinks": list of NodeMedic-supported sinks found in the package,
 "sinksHit": list of sinks hit if `--require-sink-hit` flag is specified,
 "entryPoints": list of package public APIs, e.g., [
     <entryPoint>
 ],
-"treeMetadata": metadata about the packages dependency tree (size, depth, etc.),
+"treeMetadata": metadata about the package's dependency tree (size, depth, etc.),
 "sinkType": type of sink (broadly split into ACI, exec, and ACE, eval),
-"triageData": triage data about the package, including the computed rating,
-"candidateExploit": candidate exploit synthesized for the package,
+"synthesisResult": synthesized package exploit input,
+"candidateExploit": candidate exploit for the package,
 "exploitResults": results of executing candidate exploit,
 "taskResults": object with status and runtime for every task run, e.g., {
     "task name": <taskResult>
