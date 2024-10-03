@@ -45,6 +45,11 @@ function getNumArgs(func) {
 function getFunctionProperties(testPackage, fromConstructor, prefix) {
     let baseProperties = Object.getOwnPropertyNames(Object.prototype)
                           .concat(Object.getOwnPropertyNames(Function.prototype));
+
+    if (testPackage === null || testPackage === undefined){
+      return [];
+    }
+    
     return Object.getOwnPropertyNames(testPackage)
         .filter(function (propertyName) {
             try {
@@ -84,19 +89,22 @@ while (propertyQueue.length > 0) {
     const current = propertyQueue.pop();
     const currentObject = current[0];
     const currentPrefix = current[1];
-    Object.getOwnPropertyNames(currentObject).forEach(function (propertyName) {
-        let newName = currentPrefix == '' ?
-            propertyName :
-            currentPrefix + '.' + propertyName;
-        if (typeof currentObject[propertyName] === 'object') {
-            propertyQueue.push([currentObject[propertyName], newName]);
-            entryPoints.push(...getFunctionProperties(
-                currentObject[propertyName], 
-                false, 
-                newName
-            ));
-        }
-    });
+
+    if (currentObject !== null && currentObject !== undefined){
+      Object.getOwnPropertyNames(currentObject).forEach(function (propertyName) {
+          let newName = currentPrefix == '' ?
+              propertyName :
+              currentPrefix + '.' + propertyName;
+          if (typeof currentObject[propertyName] === 'object') {
+              propertyQueue.push([currentObject[propertyName], newName]);
+              entryPoints.push(...getFunctionProperties(
+                  currentObject[propertyName], 
+                  false, 
+                  newName
+              ));
+          }
+      });
+    }
 }
 
 if (typeof testPackage === 'function') {
