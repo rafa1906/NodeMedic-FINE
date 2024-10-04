@@ -69,7 +69,7 @@ also find a `results_gather.json` file with information about which entry points
 
 Still in the root directory, you can now tell NodeMedic-FINE to analyze the package:
 ```bash
-docker run -it --rm -v $PWD/packages/:/nodetaint/packageData:rw -v $PWD/artifacts/:/nodetaint/analysisArtifacts:rw nodemedic-fine:latest --package=node-rsync --version=1.0.3 --mode=analysis`
+docker run -it --rm -v $PWD/packages/:/nodetaint/packageData:rw -v $PWD/artifacts/:/nodetaint/analysisArtifacts:rw nodemedic-fine:latest --package=node-rsync --version=1.0.3 --mode=analysis
 ```
 
 You should see a line in the output saying 
