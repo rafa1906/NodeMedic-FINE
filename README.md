@@ -40,7 +40,7 @@ emulation.
 
 ## Minimal working example
 ```bash
-docker run --rm -it nodemedic-fine:latest --package=raspberry-vol --version=1.1.0 --mode=full
+docker run --rm -it nodemedic-fine:latest --package=node-rsync --version=1.0.3 --mode=full
 ```
 The `--package` argument allows you to specify the package name to analyze 
 The `--version` argument is the specific version of that package to analyze.
@@ -56,20 +56,20 @@ and how to interpret them.
 ## Running NodeMedic-FINE 
 
 Assuming the terminal is currently on the root directory of this project, the 
-following command will download and install `raspberry-vol@1.1.0` and its 
+following command will download and install `node-rsync@1.0.3` and its 
 dependencies in on the chosen directory outside docker:
 ```bash
-docker run -it --rm -v $PWD/packages/:/nodetaint/packageData:rw -v $PWD/artifacts/:/nodetaint/analysisArtifacts:rw nodemedic-fine:latest --package=raspberry-vol --version=1.1.0 --mode=gather
+docker run -it --rm -v $PWD/packages/:/nodetaint/packageData:rw -v $PWD/artifacts/:/nodetaint/analysisArtifacts:rw nodemedic-fine:latest --package=node-rsync --version=1.0.3 --mode=gather
 ```
 
 If you take a look at the `packages` directory you will see that 
-`raspberry-vol@1.1.0` is installed there. In the `artifacts` directory, you will 
+`node-rsync@1.0.3` is installed there. In the `artifacts` directory, you will 
 also find a `results_gather.json` file with information about which entry points 
 (exported functions) the packages has, among other metadata.
 
 Still in the root directory, you can now tell NodeMedic-FINE to analyze the package:
 ```bash
-docker run -it --rm -v $PWD/packages/:/nodetaint/packageData:rw -v $PWD/artifacts/:/nodetaint/analysisArtifacts:rw nodemedic-fine:latest --package=raspberry-vol --version=1.1.0 --mode=analysis`
+docker run -it --rm -v $PWD/packages/:/nodetaint/packageData:rw -v $PWD/artifacts/:/nodetaint/analysisArtifacts:rw nodemedic-fine:latest --package=node-rsync --version=1.0.3 --mode=analysis`
 ```
 
 You should see a line in the output saying 
