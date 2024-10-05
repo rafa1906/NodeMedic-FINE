@@ -6,7 +6,8 @@ tool for vulnerability discovery, triage, and confirmation in Node.js packages.
 ## Prerequisites
 Running NodeMedic-FINE requires a system with at least 4 GB of RAM and 5 GB of 
 storage (storage requirements will vary depending on the number of packages 
-one analyzes).
+one analyzes). There is no specific CPU requirement, but the workload is
+CPU-bound, so having a more powerful CPU will help. There is no GPU requirement.
 
 NodeMedic-FINE has been tested on macOS and Linux, but any operating system 
 (e.g., Windows) that can run Docker containers should be sufficient.
