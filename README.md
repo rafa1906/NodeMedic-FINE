@@ -79,7 +79,7 @@ a proof-of-concept exploit to confirm it.
 
 In this package, NodeMedic-FINE is able to successfully synthesize an exploit. 
 You should therefore also see a line that looks like 
-`Exploit(s) found for functions: prototype.runCommand` reporting that an exploit 
+`Exploit(s) found for functions:` reporting that an exploit 
 was found and stating the vulnerable entry point.
 
 The `artifacts/` directory will now have the analysis results, including 
