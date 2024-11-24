@@ -174,3 +174,17 @@ The list of possible tasks is:
 - `setSinkType`: Sets the type of the sink (command injection or code execution).
 - `smt`: Runs exploit synthesis on the provenance graph generated during provenance analysis.
 - `checkExploit`: Checks whether any synthesized candidate exploits were successful.
+
+
+## Repository Structure
+The repository is organized as follows:
+- `artifacts`: An empty directory where analysis artifacts are stored when running NodeMedic-FINE as shown above in the readme.
+- `lib`: Contains components that NodeMedic-FINE uses to analyze packages:
+    - `fuzzer`: Type- and structure-aware fuzzer that generates package API inputs.
+    - `NodeExploitSynthesis`: Exploit synthesis engine that generates candidate exploits from provenance graphs.
+- `packages`: An empty directory where npm packages to analyze are stored when running NodeMedic-FINE as shown above in the readme.
+- `pipeline`: Contains the NodeMedic-FINE pipeline "orchestrator" that will handle downloading and installing packages to analyze, fuzzing them, running the NodeMedic provenance analysis, and then running automated exploit confirmation.
+- `src`: Provenance analysis source code shared with the NodeMedic analysis.
+- `tests`: Contains test files:
+    - `case_studies`: A set of case studies applicable to the NodeMedic provenance analysis.
+    - `unit_jalangi`: A set of unit tests that check the correctness of the NodeMedic provenance analysis.
