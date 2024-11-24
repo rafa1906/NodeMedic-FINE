@@ -50,6 +50,7 @@ COPY pipeline ./pipeline
 # Set up dependencies and libraries
 RUN npm i
 RUN cd pipeline && npm i
+RUN chmod +x lib/setup-deps.sh
 RUN cd lib && ./setup-deps.sh
 
 # Set up analysis
