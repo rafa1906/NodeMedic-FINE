@@ -3,8 +3,10 @@
 This is the repository for NodeMedic-FINE, an end-to-end dynamic provenance analysis 
 tool for vulnerability discovery, triage, and confirmation in Node.js packages.
 
-This repository is associated with the NDSS'24 paper, 
+This repository is associated with the NDSS'25 paper, 
 _NodeMedic-FINE: Automatic Detection and Exploit Synthesis for Node.js Vulnerabilities_.
+
+Associated artifact: https://zenodo.org/records/14249091. 
 
 ## Prerequisites
 Running NodeMedic-FINE requires a system with at least 4 GB of RAM and 5 GB of 
