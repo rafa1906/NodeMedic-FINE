@@ -1,7 +1,7 @@
 import { modulePolicy } from './PolicyInterface';
 import { State } from '../State';
 import { Wrapped, Unwrapped } from '../Wrapper';
-import { F, Either, NativeFunction } from '../Flib';
+import { F, Either, ExternalFunction } from '../Flib';
 import { imprecisePolicy } from './Object';
 import { getTaintEntry, getValue } from '../Taint';
 import { getObjectPolicy } from './PolicyManager';
@@ -66,7 +66,7 @@ export const GlobalPolicy: modulePolicy = {
 
     TCall(
         s: State, 
-        f: NativeFunction, 
+        f: ExternalFunction, 
         base: Wrapped, 
         args: Wrapped[], 
         result: Wrapped
