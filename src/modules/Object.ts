@@ -64,14 +64,14 @@ function wrapObject(
 
 export const ObjectPolicy: modulePolicy = {
 
-    nativeMethodWrapperPolicies: {
+    externalMethodWrapperPolicies: {
         'defineProperty': {
             pre: F.Just(definePropertyWrapPre),
             post: F.Nothing(),
         },
     },
 
-    nativeMethodTaintPolicies: {},
+    externalMethodTaintPolicies: {},
 
     isTainted(s: State, v: Wrapped) {
         const tE = F.eitherThrow(getTaintEntry(s, v));
@@ -98,7 +98,7 @@ export const ObjectPolicy: modulePolicy = {
     },
 
     WInvokeFunPre(s: State, f: Function, base: Wrapped, args: Wrapped[]): [State, any, any[]] {
-        return F.matchMaybe(externalMethodWrapperPolicyDispatch(this.nativeMethodWrapperPolicies, f, WrapperPolicyType.pre), {
+        return F.matchMaybe(externalMethodWrapperPolicyDispatch(this.externalMethodWrapperPolicies, f, WrapperPolicyType.pre), {
             Just: (policy: ExternalMethodWrapPrePolicy) => F.eitherThrow(policy(s, f, base, args)),
             // Fall back to ObjectPolicy
             Nothing: () => {
@@ -124,7 +124,7 @@ export const ObjectPolicy: modulePolicy = {
     },
 
     WInvokeFun(s: State, f: Function, base: any, args: any[], result: any): [State, any, any[], any] {
-        return F.matchMaybe(externalMethodWrapperPolicyDispatch(this.nativeMethodWrapperPolicies, f, WrapperPolicyType.post), {
+        return F.matchMaybe(externalMethodWrapperPolicyDispatch(this.externalMethodWrapperPolicies, f, WrapperPolicyType.post), {
             Just: (policy: ExternalMethodWrapPostPolicy) => F.eitherThrow(policy(s, f, base, args, result)),
             // Fall back to ObjectPolicy
             Nothing: () => {
@@ -275,14 +275,14 @@ export const ObjectPolicy: modulePolicy = {
 
 export const ObjectPolicyImprecise: modulePolicy = {
 
-    nativeMethodWrapperPolicies: {
+    externalMethodWrapperPolicies: {
         'defineProperty': {
             pre: F.Just(definePropertyWrapPre),
             post: F.Nothing(),
         },
     },
 
-    nativeMethodTaintPolicies: {},
+    externalMethodTaintPolicies: {},
 
     isTainted(s: State, v: Wrapped) {
         const tE = F.eitherThrow(getTaintEntry(s, v));

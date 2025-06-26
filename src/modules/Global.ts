@@ -9,9 +9,9 @@ import { getObjectPolicy } from './PolicyManager';
 
 export const GlobalPolicy: modulePolicy = {
 
-    nativeMethodWrapperPolicies: {},
+    externalMethodWrapperPolicies: {},
 
-    nativeMethodTaintPolicies: {},
+    externalMethodTaintPolicies: {},
 
     isTainted(s: State, v: Wrapped) {
         const tE = F.eitherThrow(getTaintEntry(s, v));

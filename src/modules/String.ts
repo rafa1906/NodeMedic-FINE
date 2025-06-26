@@ -12,9 +12,9 @@ import { getObjectPolicy, policyPrecisionMap } from './PolicyManager';
 
 export const StringPolicyPrecise: modulePolicy = {
 
-    nativeMethodWrapperPolicies: {},
+    externalMethodWrapperPolicies: {},
 
-    nativeMethodTaintPolicies: {
+    externalMethodTaintPolicies: {
         "blink": stringBlink,
         "substring": stringSubstring,
         "concat": stringConcat,
@@ -161,7 +161,7 @@ export const StringPolicyPrecise: modulePolicy = {
                 // Fall back to module policies or imprecise policy
             }
         }
-        return F.matchMaybe(externalMethodTaintPolicyDispatch(this.nativeMethodTaintPolicies, f), {
+        return F.matchMaybe(externalMethodTaintPolicyDispatch(this.externalMethodTaintPolicies, f), {
             Just: (policy: ExternalMethodTaintPolicy) => policy(s, f as NativeFunction, base, args, result),
             // Fall back to Object policy
             Nothing: () => getObjectPolicy().TCall(s, f, base, args, result)

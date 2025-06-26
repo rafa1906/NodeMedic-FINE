@@ -4,8 +4,8 @@ import { Either, ExternalFunction, Maybe, F } from '../Flib';
 
 
 export interface modulePolicy {
-    nativeMethodWrapperPolicies: Object,
-    nativeMethodTaintPolicies: Object,
+    externalMethodWrapperPolicies: Object,
+    externalMethodTaintPolicies: Object,
 
     isTainted(s: State, value: Wrapped): boolean,
 
