@@ -42,6 +42,7 @@ RUN pyenv global ${PYTHON_VERSION}
 COPY lib ./lib
 COPY src ./src
 COPY tests ./tests
+COPY example-analysis ./example-analysis
 COPY package*.json ./
 COPY tsconfig.json .
 COPY Makefile .
