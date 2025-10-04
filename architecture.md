@@ -37,11 +37,11 @@ I will add some tests under `example-analysis` of programs that we would like to
 - `example-analysis/test1.js`: sanity check, analysis currently supported by `jalangi2`
 - `example-analysis/test2.js`: taint propagated via `Promise`
     - Completely unsupported by Jalangi
-- `example-analysis/test3.js`: taint propagated via `for p in obj` (`for...in` loop); callback only exposes `obj` (before the loop) and not `p` (inside the loop), so we lose taint in field names (e.g., if full object is tainted, field names should also be tainted)
+- `example-analysis/test3.js`: taint propagated via `for (p in obj)` (`for...in` loop); callback only exposes `obj` (before the loop) and not `p` (inside the loop), so we lose taint in field names (e.g., if full object is tainted, field names should also be tainted)
     - Unsupported by Jalangi and in this version of the analysis
     - Possible to solve this in the analysis by "patching together" the reference to `obj` with the references to `p`, but this is more of an ad hoc solution than principled design; ideally, the instrumentation would expose this connection in the callback itself
-- `example-analysis/test4.js`: taint propagated via conditional assignment, e.g., `x = (x || '')`
-    - Jalangi doesn't distinguish between conditional assignment and "true" conditionals
+- `example-analysis/test4.js`: taint propagated via conditional expression, e.g., `x || ''`
+    - Jalangi doesn't distinguish between "true" conditionals (e.g., used in an `if`) and other conditional expressions
     - But taint propagation works differently between the two cases
 - `example-analysis/test5.js`: taint propagated via native methods; behaves differently depending on method in question (e.g., for a set `base`, `res = base.has(args)` only affects `res` but `res = base.delete(args)` affects both `res` and `base`)
     - Jalangi is "blind" to the fact that a method is native, so we have to handle them like any other function

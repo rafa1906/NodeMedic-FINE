@@ -42,7 +42,7 @@ z = wrapPayload(y);
 deliver(z);
 
 
-// Expected output:
+// Expected/actual output:
 // node test1.js: 
 //     x = 1 -> Evaluating "1 + 1" => 2
 //     x = "console.log('pwned');//" -> pwned [...]
